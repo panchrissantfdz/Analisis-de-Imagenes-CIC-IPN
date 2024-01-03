@@ -166,6 +166,12 @@ __published:	// IDE-managed Components
         TAction *AsTransparentSelection;
         TAction *AsDimSelection;
         TMenuItem *Weighted21;
+        TMenuItem *MedialAxis1;
+        TMenuItem *Noise1;
+        TMenuItem *UniformNoiseRandom1;
+        TMenuItem *ExponencialNoiseRandom1;
+        TMenuItem *SaltPepperNoiseRandom1;
+        TMenuItem *Pseudocolor1;
         void __fastcall MHAboutClick(TObject *Sender);
         void __fastcall FileOpenExecute(TObject *Sender);
         void __fastcall FileExitExecute(TObject *Sender);
@@ -211,6 +217,11 @@ __published:	// IDE-managed Components
         void __fastcall FormDblClick(TObject *Sender);
         void __fastcall MCGWeightedClick(TObject *Sender);
         void __fastcall Weighted21Click(TObject *Sender);
+        void __fastcall MedialAxis1Click(TObject *Sender);
+        void __fastcall UniformNoiseRandom1Click(TObject *Sender);
+        void __fastcall SaltPepperNoiseRandom1Click(TObject *Sender);
+        void __fastcall ExponencialNoiseRandom1Click(TObject *Sender);
+        void __fastcall Pseudocolor1Click(TObject *Sender);
 private:
         String dirApplication;
         MyLUT Original[256];

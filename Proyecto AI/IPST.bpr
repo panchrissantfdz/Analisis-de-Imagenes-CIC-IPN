@@ -9,7 +9,8 @@
       operaciones.obj ElemStrucBi.obj Morpho.obj ProcImg.obj StrucEE.obj 
       ZoomInForm.obj ErosionGeodesicForm.obj GeodesicDilationForm.obj 
       ReconstructionErosionForm.obj ReconstructionDilationForm.obj 
-      EntradaForm.obj ChildWin.obj"/>
+      EntradaForm.obj ChildWin.obj MedialAxis.obj Ruido.obj SalyPim.obj Exp.obj 
+      Fondo.obj"/>
     <RESFILES value="IPST.res"/>
     <IDLFILES value=""/>
     <IDLGENFILES value=""/>
@@ -18,7 +19,8 @@
       Normalizar.dfm Resolution.dfm Resolution1.dfm Zoom.dfm ZoomNe.dfm 
       operaciones.dfm ElemStrucBi.dfm ZoomInForm.dfm ErosionGeodesicForm.dfm 
       GeodesicDilationForm.dfm ReconstructionErosionForm.dfm 
-      ReconstructionDilationForm.dfm EntradaForm.dfm ChildWin.dfm"/>
+      ReconstructionDilationForm.dfm EntradaForm.dfm ChildWin.dfm MedialAxis.dfm 
+      Ruido.dfm SalyPim.dfm Exp.dfm Fondo.dfm"/>
     <LIBFILES value=""/>
     <LIBRARIES value="bcb2kaxserver.lib tee.lib dbrtl.lib vcldb.lib SUIPackC6.lib vclx.lib 
       bcbsmp.lib vcl.lib rtl.lib"/>
@@ -90,6 +92,11 @@
       <FILE FILENAME="ReconstructionDilationForm.cpp" FORMNAME="FormReconstructionDilation" UNITNAME="ReconstructionDilationForm" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="EntradaForm.cpp" FORMNAME="FormEntrada" UNITNAME="EntradaForm" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="ChildWin.cpp" FORMNAME="MDIChild" UNITNAME="ChildWin" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="MedialAxis.cpp" FORMNAME="Medial_Axis" UNITNAME="MedialAxis" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Ruido.cpp" FORMNAME="Noise" UNITNAME="Ruido" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SalyPim.cpp" FORMNAME="SaltnPepper" UNITNAME="SalyPim" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Exp.cpp" FORMNAME="Exponencial" UNITNAME="Exp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Fondo.cpp" FORMNAME="Background" UNITNAME="Fondo" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
   </FILELIST>
   <BUILDTOOLS>
   </BUILDTOOLS>

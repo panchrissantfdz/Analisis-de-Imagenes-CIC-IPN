@@ -1,6 +1,6 @@
 object MainForm: TMainForm
-  Left = 298
-  Top = 198
+  Left = 303
+  Top = 161
   Width = 981
   Height = 583
   Caption = 'Image Processing System (Student'#39's Edition)'
@@ -24,7 +24,7 @@ object MainForm: TMainForm
   TextHeight = 13
   object StatusBar: TStatusBar
     Left = 0
-    Top = 506
+    Top = 505
     Width = 965
     Height = 19
     Panels = <
@@ -323,6 +323,29 @@ object MainForm: TMainForm
     end
     object MEdit: TMenuItem
       Caption = '&Edit'
+      object MedialAxis1: TMenuItem
+        Caption = 'Medial Axis'
+        OnClick = MedialAxis1Click
+      end
+      object Noise1: TMenuItem
+        Caption = 'Noise'
+        object UniformNoiseRandom1: TMenuItem
+          Caption = 'Uniform Noise Random'
+          OnClick = UniformNoiseRandom1Click
+        end
+        object ExponencialNoiseRandom1: TMenuItem
+          Caption = 'Exponencial Noise Random'
+          OnClick = ExponencialNoiseRandom1Click
+        end
+        object SaltPepperNoiseRandom1: TMenuItem
+          Caption = 'Salt & Pepper Noise Random'
+          OnClick = SaltPepperNoiseRandom1Click
+        end
+      end
+      object Pseudocolor1: TMenuItem
+        Caption = 'Pseudocolor'
+        OnClick = Pseudocolor1Click
+      end
     end
     object MView: TMenuItem
       Caption = '&View'

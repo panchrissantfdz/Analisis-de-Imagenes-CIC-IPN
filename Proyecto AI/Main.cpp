@@ -2,6 +2,8 @@
 #include <vcl.h>
 #include <stdio.h>
 #include <math.h>
+#include <vector>
+#include <algorithm>
 #pragma hdrstop
 #include "AboutWin.h"
 #include "Main.h"
@@ -24,6 +26,14 @@
 #include "ReconstructionErosionForm.h"
 #include "ReconstructionDilationForm.h"
 #include "ChildWin.h"
+#include "MedialAxis.h"
+#include "Ruido.h"
+#include "SalyPim.h"
+#include "Exp.h"
+#include <jpeg.hpp>
+#include "Fondo.h"
+
+
 
 
 
@@ -82,7 +92,7 @@ if(pBitmap!=NULL){//Carga Child con una imagen nueva resultado de un proceso
  if(reopen==1){
   NewItem->OnClick=ReopenFile;
   MFReopen->Insert(0,NewItem);
-  nopen++;
+  nopen++;                                          
   reopen=0;
   }
  //                pBitmap->PixelFormat=pf24bit;
@@ -1350,7 +1360,7 @@ AgregarAnalisisReporte(Child,Child2,proceso);
 //Child2->ReportProcessedImageChild->Lines->Add(AnsiString("Etiqueta: ")+);
 Child2->ImageClick(Child2);
 Screen->Cursor = crDefault;
-}        
+}
 }
 //---------------------------------------------------------------------------
 
@@ -1372,7 +1382,7 @@ Child2->ImageClick(Child2);
 pBitmap->FreeImage();
 delete pBitmap;
 }
-Screen->Cursor = crDefault;        
+Screen->Cursor = crDefault;
 }
 //---------------------------------------------------------------------------
 
@@ -1566,7 +1576,7 @@ Child2->ImageClick(Child2);
 pBitmap->FreeImage();
 delete pBitmap;
 Screen->Cursor = crDefault;
-}        
+}
 }
 //---------------------------------------------------------------------------
 void __fastcall TMainForm::Weighted21Click(TObject *Sender)
@@ -1589,7 +1599,7 @@ Child2->ImageClick(Child2);
 pBitmap->FreeImage();
 delete pBitmap;
 Screen->Cursor = crDefault;
-}                
+}
 }
 //---------------------------------------------------------------------------
 
@@ -1604,6 +1614,113 @@ Screen->Cursor = crDefault;
 
 
 
+/*
+//-------------------Funciones de Eje Medio / Esqueleto------------------------
+void  __fastcall __EjeMedio( Graphics::TBitmap  *Original, Graphics::TBitmap *Modificada )
+{
+
+Graphics::TBitmap *Bitmap1=new Graphics::TBitmap();
+int width  = Bitmap1->Width;   //Ancho
+int height = Bitmap1->Height;  //Altura
+int kx = 0, ky = 0, kz = 0;
+std::vector<int> ValorMedio;
+ int maxb=0,minb=255,maxg=0,ming=255,maxr=0,minr=255;
+
+
+
+
+        for(int x = 0; x<width; x++){
+
+          for(int y = 0; y<height; y++){
+              if( y == 0) {
+                 ky += y;
+                 ValorMedio.push_back((Bitmap1->Canvas->Pixels[x][y]));
+
+              }
+          }
+                if(ValorMedio.size() % 2 == 0){
+                        kz  = ValorMedio.size()/2;
+                }
+                else{
+                        kz = ky/ValorMedio.size(); //obteniendo el valor medio de y
+               }
+               TColor medio;
+               medio = TColor(clRed);
+               //Agrega para colorear el pixel
+               Bitmap1->Canvas->Pixels[x][kz] = medio;
+
+            // ky = (Bitmap1->Canvas->Pixels[x][height])/2;
+           // ValorMedio.push_back((bitmap->Canvas->Pixels[x][height/2]));
+           ky = 0;
+           ValorMedio.empty();
+
+        }
+
+
+
+
+
+
+}
+//------------------------------------------------------------------------
+
+
+
+
+
+
+      */
+
+
+    //-------------------Funciones de Eje Medio / Esqueleto------------------------
+void  __fastcall __EjeMedio( Graphics::TBitmap  *Original )
+{
+
+Graphics::TBitmap *Bitmap1=new Graphics::TBitmap();
+int width  = Bitmap1->Width;   //Ancho
+int height = Bitmap1->Height;  //Altura
+int kx = 0, ky = 0, kz = 0;
+std::vector<int> ValorMedio;
+ int maxb=0,minb=255,maxg=0,ming=255,maxr=0,minr=255;
+
+
+
+
+        for(int y = 0; y<width; y++){
+
+          for(int x = 0; x<height; x++){
+              if( x == 0) {
+                 ky += x;
+                 ValorMedio.push_back((Bitmap1->Canvas->Pixels[x][y]));
+
+              }
+          }
+                if(ValorMedio.size() % 2 == 0){
+                        kz  = ValorMedio.size()/2;
+                }
+                else{
+                        kz = ky/ValorMedio.size(); //obteniendo el valor medio de y
+               }
+               TColor medio;
+               medio = TColor(10);
+               //Agrega para colorear el pixel
+               for(int c = kz-4; c<kz+4;c++){
+                 Bitmap1->Canvas->Pixels[y][c] = medio;
+               }
+            // ky = (Bitmap1->Canvas->Pixels[x][height])/2;
+           // ValorMedio.push_back((bitmap->Canvas->Pixels[x][height/2]));
+           ky = 0;
+           ValorMedio.empty();
+
+        }
+
+
+
+
+
+
+}
+//------------------------------------------------------------------------
 
 
 
@@ -1611,9 +1728,112 @@ Screen->Cursor = crDefault;
 
 
 
+void __fastcall TMainForm::MedialAxis1Click(TObject *Sender)
+{
+
+/*TMDIChild* Child = (TMDIChild *)ActiveMDIChild;
+Screen->Cursor = crHourGlass;
+if(Child!=NULL){
+        Graphics::TBitmap *Bitmap_Eje = new Graphics::TBitmap();
+        Graphics::TBitmap *pBitmap = new Graphics::TBitmap();
+        pBitmap->Assign(Child->ActiveBitmap());
+
+        //  __EjeMedio( Child->Image->Picture->Bitmap, pBitmap);
+        __EjeMedio( pBitmap);
+        String name=ExtractFilePath(Child->FileName)+"\Eje Medio="+ExtractFileName(Child->FileName);
+        CreateMDIChild(name,pBitmap);
+        pBitmap->FreeImage();
+        delete pBitmap;
+}
+Screen->Cursor = crDefault;*/
+
+
+
+
+Medial_Axis->Show();
+
+
+}
+
+//---------------------Funciones Ruido-------------------------
+void __fastcall TMainForm::UniformNoiseRandom1Click(TObject *Sender)
+{
+      Noise->Show();
+      return;
+}
+//---------------------------------------------------------------------------
+
+ /*
+ void AplicarRuido(Graphics::TBitmap *bitmap, int v) {
+
+    int width = bitmap->Width;
+    int height = bitmap->Height;
+    int r;
+        srand(time(0));
+    // Bucle externo que recorre las filas de la imagen
+    for (int y = 0; y < height; y++) {
+        // Bucle interno que recorre las columnas de la imagen
+        for (int x = 0; x < width; x++) {
+            // r = rand()%2;
+
+
+                int ran = rand()%2;
+
+                if(ran == 0){
+                       bitmap->Canvas->Pixels[x][y] =  0;
+                       }
+                else{
+                       bitmap->Canvas->Pixels[x][y] =  RGB(255,255,255);
+                       }
 
 
 
 
 
+        }
+    }
+}
+
+
+*/
+
+
+void __fastcall TMainForm::SaltPepperNoiseRandom1Click(TObject *Sender)
+{
+/*
+       //SaltnPepper->Show();
+        TMDIChild* Child = (TMDIChild *)ActiveMDIChild;
+Screen->Cursor = crHourGlass;
+if(Child!=NULL){
+Graphics::TBitmap *Bitmap_Eje = new Graphics::TBitmap();
+Graphics::TBitmap *pBitmap = new Graphics::TBitmap();
+pBitmap->Assign(Child->ActiveBitmap());
+
+
+String name=ExtractFilePath(Child->FileName)+"\SalyPimienta="+ExtractFileName(Child->FileName);
+CreateMDIChild(name,pBitmap);
+pBitmap->FreeImage();
+delete pBitmap;
+}
+Screen->Cursor = crDefault;
+                           */
+        SaltnPepper->Show();
+        return;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::ExponencialNoiseRandom1Click(TObject *Sender)
+{
+     Exponencial->Show();
+     return;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::Pseudocolor1Click(TObject *Sender)
+{
+        Background->Show();
+
+        return;
+}
+//---------------------------------------------------------------------------
 

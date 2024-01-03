@@ -72,6 +72,11 @@ USEFORM("ReconstructionErosionForm.cpp", FormReconstructionErosion);
 USEFORM("ReconstructionDilationForm.cpp", FormReconstructionDilation);
 USEFORM("EntradaForm.cpp", FormEntrada);
 USEFORM("ChildWin.cpp", MDIChild);
+USEFORM("MedialAxis.cpp", Medial_Axis);
+USEFORM("Ruido.cpp", Noise);
+USEFORM("SalyPim.cpp", SaltnPepper);
+USEFORM("Exp.cpp", Exponencial);
+USEFORM("Fondo.cpp", Background);
 //---------------------------------------------------------------------------
 WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -96,6 +101,11 @@ WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                  Application->CreateForm(__classid(TFormGeodesicDilation), &FormGeodesicDilation);
                  Application->CreateForm(__classid(TFormReconstructionErosion), &FormReconstructionErosion);
                  Application->CreateForm(__classid(TFormReconstructionDilation), &FormReconstructionDilation);
+                 Application->CreateForm(__classid(TMedial_Axis), &Medial_Axis);
+                 Application->CreateForm(__classid(TNoise), &Noise);
+                 Application->CreateForm(__classid(TSaltnPepper), &SaltnPepper);
+                 Application->CreateForm(__classid(TExponencial), &Exponencial);
+                 Application->CreateForm(__classid(TBackground), &Background);
                  Application->Run();
                  }
         catch (Exception &exception)
